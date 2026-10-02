@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Finding / Report Updated",
+  "description": "Fires when the daemon log or state file is updated, or when a new bounty draft, incident, or SCAN report appears in the reports/ directory.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "reports/daemon.log",
+      "reports/state.json",
+      "reports/bounty-draft-*.md",
+      "reports/INCIDENT-*.md",
+      "reports/SCAN.md",
+      "reports/daemon.crash.log"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A report or state file was just updated by the exploit-lab daemon. Scan the file and report what happened:\n\n- If it is reports/state.json: summarize the current mode, cycle count, any challenge statuses that changed, and any watchlist entries with finding=true or new lastResult strings.\n- If it is reports/daemon.log: scan the last 60 lines for [FINDING], [DRAIN REPRODUCED], [PROFIT_WEI], cycle errors, or RPC failovers and summarize in plain language.\n- If it is a bounty-draft-*.md: this is a CRITICAL event — read the full file and extract the pool address, technique, profit estimate, and recommended next step (submit to bounty program).\n- If it is an INCIDENT-*.md: read it and summarize what protocol triggered the first-responder balance watchdog and by how much the balance dropped.\n- If it is reports/SCAN.md: summarize total chains scanned, pools probed, and any reproduced drains.\n- If it is reports/daemon.crash.log: this is URGENT — read the full stack trace and identify the root cause of the crash.\n\nAlways start your response with the filename and a one-line severity tag: INFO | WARNING | CRITICAL."
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "intervalSec": 30,
+    "workers": 6,
+    "probeWorkers": 8,
+    "watchlist": [],
+    "scanEveryCycles": 5,
+    "forkUrl": null,
+    "attachRpc": null,
+    "mainnetOnly": false,
+    "scanTopN": 10,
+    "scanBlocksBack": 5000,
+    "digestHours": 0,
+    "respond": 0
+  },
+  {
+    "intervalSec": 30,
+    "workers": 4,
+    "probeWorkers": 6,
+    "watchlist": [],
+    "scanEveryCycles": 7,
+    "forkUrl": null,
+    "attachRpc": null,
+    "mainnetOnly": false,
+    "scanTopN": 8,
+    "scanBlocksBack": 4000,
+    "digestHours": 0,
+    "respond": 0
+  }
+]

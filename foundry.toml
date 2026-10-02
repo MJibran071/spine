@@ -1,0 +1,17 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+solc = "0.8.25"
+optimizer = true
+optimizer_runs = 200
+
+[profile.default.fuzz]
+runs = 64
+
+[profile.default.invariant]
+runs = 64
+
+# Never allow scripts to broadcast to live chains from this workspace.
+# All exploit work happens in local simulation (forge test / anvil forks).

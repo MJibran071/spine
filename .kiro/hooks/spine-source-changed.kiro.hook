@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Agent Source Changed",
+  "description": "Fires whenever a TypeScript source file in the agent is saved. Summarizes what changed and flags any impact on the running daemon (e.g. detector rules, triage config, safety rails, bus events).",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "agent/src/*.ts",
+      "agent/src/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A source file in the exploit-lab agent was just saved. Review what changed and report:\n1. Which module was edited and what the change does\n2. Whether this affects any safety rail (safety.ts, assertLocalRpc, assertSafeArgs, --broadcast guard)\n3. Whether this affects an active daemon component (daemon.ts loop, bus.ts state, notify.ts, triage.ts budget, fork.ts probes)\n4. Whether the daemon needs to be restarted to pick up the change (it runs as a long-lived Node process)\n5. Any obvious bugs introduced\n\nKeep it concise — one paragraph max per point that is actually relevant."
+  }
+}

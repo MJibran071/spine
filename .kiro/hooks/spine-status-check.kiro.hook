@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Daemon Status Check",
+  "description": "Manually triggered status check — reads the live daemon log, state.json, and all recent reports to give a full picture of what the daemon is doing right now.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run a full status check on the exploit-lab daemon. Read all of these files and produce a structured report:\n\n1. reports/state.json — current mode, cycle, challenge statuses, watchlist shapes + results, KB wins, last 10 events\n2. reports/daemon.log (last 100 lines) — recent activity, any errors or findings\n3. reports/triage-state.json — LLM triage calls used today vs daily max\n4. reports/knowledge.json — how many winning techniques are recorded\n5. List any bounty-draft-*.md or INCIDENT-*.md files and summarize them if present\n\nFormat as:\n## Status: [HEALTHY / DEGRADED / CRITICAL]\n### Cycle & Mode\n### Active Challenges\n### Watchlist (pool shapes + last results)\n### Findings\n### LLM Triage Budget\n### Knowledge Base\n### Recent Events (last 10)\n### Issues / Recommendations\n\nBe specific — include actual cycle numbers, addresses, technique names, and profit amounts where available."
+  }
+}

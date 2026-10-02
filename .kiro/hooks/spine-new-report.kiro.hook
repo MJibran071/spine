@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "New Report Created",
+  "description": "Fires when any new file is created in the reports/ directory — catches new bounty drafts, incident reports, governance reports, and digest files the moment they land.",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "reports/*.md",
+      "reports/*.json",
+      "reports/*.log"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new file was just created in the exploit-lab reports/ directory. Read it immediately and classify it:\n\n- bounty-draft-*.md → CRITICAL: extract pool address, technique, profit_wei, and advise on next steps\n- INCIDENT-*.md → WARNING: identify the protocol, the balance drop amount, and the timestamp\n- daemon.crash.log → CRITICAL: show the stack trace and diagnose the crash cause\n- GOVERNANCE.md → INFO: summarize any high-risk authorities found (timelocks below 48h, low-threshold multisigs, mutable proxies)\n- DIGEST-*.md → INFO: give a one-paragraph summary of the period's activity\n- SCAN.md → INFO: chains scanned, pools probed, drains reproduced\n- Any other file → read and summarize\n\nStart your response with the filename and severity: INFO | WARNING | CRITICAL."
+  }
+}
